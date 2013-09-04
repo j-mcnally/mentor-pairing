@@ -1,11 +1,16 @@
 class AppointmentRequestsController < ApplicationController
   def new
     @availability = Availability.find_by_id(params[:availability_id])
+    @appointment_request = Appointment.new
     return redirect_to availabilities_path unless @availability.present?
   end
 
   def create
     @availability = Availability.find_by_id(params[:availability_id])
+
+    mentee_params = params[:appointment].delete(:user)
+    params.merge!(mentee_params)
+    @appointment_request = Appointment.new
     mentee = User.find_by_email(params[:email])
     if mentee.nil? || !mentee.activated?
       mentee = User.create!(user_params).send_activation

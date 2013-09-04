@@ -1,10 +1,16 @@
-<%= form_tag availabilities_path do %>
-<p>Name: <%= text_field_tag :first_name %><%= text_field_tag :last_name %></p>
-<p>Twitter handle: <%= text_field_tag :twitter_handle %></p>
-<p>Email address: <%= text_field_tag :email %></p>
-<p>Date &amp; time available for mentoring: <%= datetime_select :availability, :start_time %>
-<p>Duration in minutes: <%= text_field :availability, :duration %></p>
-<p>Timezone: <%= time_zone_select(:availability, :timezone, ActiveSupport::TimeZone.us_zones, default: "Central Time (US & Canada)") %></p>
-<p>Location: <%= text_field :availability, :location %></p>
-<input type="submit" />
+<div class="page-header">
+<h1>Be a mentor</h1>
+</div>
+<%= simple_form_for @availability do |f| %>
+  <%= f.fields_for f.object.build_mentor do |mf| %>
+    <%=mf.input :first_name %>
+    <%=mf.input :last_name %>
+    <%=mf.input :twitter_handle %>
+    <%=mf.input :email %>
+  <% end %>
+  <%=f.input :start_time, :as => :ui_date_time_picker %>
+  <%=f.input :duration, :label => "Duration (in minutes)" %>
+  <%=f.input :timezone, :as => :time_zone, :priority => /US/ %>
+  <%=f.input :location %>
+  <%=f.submit :class => "btn btn-primary" %>
 <% end %>

@@ -7,15 +7,25 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<header>
-  <ul>
-    <li style="display: inline;"><%= link_to "Availabilities", availabilities_path %></li>
-    <li style="display: inline;"><%= link_to "Offer to mentor someone", new_availability_path %></li>
-  </ul>
-</header>
-<p style="color:green"><%= flash[:notice] %></p>
-
-<%= yield %>
-
+  <header>
+    <div class="navigation navbar-fixed-top">
+      <div class="navbar">
+        <div class="navbar-inner">
+          <div class="container">
+            <a class="brand" href="/"><%=image_tag 'caring.png' %>Paring Is Caring</a>
+            <ul class="nav nav-tabs">
+              <li ><%= link_to "Availabilities", availabilities_path %>
+              </li>
+              <li><%= link_to "Offer to mentor someone", new_availability_path %></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <div class="container">
+    <p style="color:green"><%= flash[:notice] %></p>
+    <%= yield %>
+  </div>
 </body>
 </html>

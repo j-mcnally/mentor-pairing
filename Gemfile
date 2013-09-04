@@ -13,6 +13,7 @@ gem 'pg'
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
+  gem 'bootstrap-sass', '~> 2.3.1.0'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
@@ -24,9 +25,13 @@ group :development, :test do
   gem 'rspec-rails', '~> 2.0'
   gem 'shoulda-matchers'
   gem 'factory_girl_rails', '~> 4.0'
+  gem 'mysql2'
 end
-
+gem 'ui_datepicker-rails3'
+gem 'simple_form'
+gem 'jquery-ui-rails'
 gem 'jquery-rails'
+
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

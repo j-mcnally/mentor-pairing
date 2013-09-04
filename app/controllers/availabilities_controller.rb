@@ -5,6 +5,9 @@ class AvailabilitiesController < ApplicationController
   end
 
   def create
+    mentor_params = params[:availability].delete(:user)
+    params.merge!(mentor_params)
+
     mentor = find_or_activate_by_email
     mentor.availabilities.create!(params[:availability])
     redirect_to availabilities_path

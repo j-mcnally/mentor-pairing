@@ -1,18 +1,76 @@
-<h1>Available Mentoring Opportunities</h1>
-<% if @availabilities.empty? %>
-  There isn't currently any upcoming mentoring availibility. <%= link_to "Offer to mentor someone!", new_availability_path %>
-<% end %>
-<% @availabilities.each do |a| %>
-<p>
-  <%= link_to_user(a.mentor) %>
-  on <%= display_availability(a) %>
-  <%= link_to "Sign up", new_appointment_request_path(:availability_id => a.id) %>
-</p>
-<% end %>
+<div class="page-header">
+  <h1>Available Mentoring Opportunities</h1>
+</div>
 
-<% unless @appointments.empty? %><h1>Upcoming Mentoring Appointments</h1><% end %>
-<% @appointments.each do |a| %>
-<p>
-  <%= display_appointment(a) %>
-</p>
-<% end %>
+  <% if @availabilities.empty? %>
+    There isn't currently any upcoming mentoring availibility. <%= link_to "Offer to mentor someone!", new_availability_path %>
+  <% else %>
+  <table class="table">
+    <colgroup>
+      <col width="20%">
+      <col width="60%">
+      <col width="20%">
+    </colgroup>
+    <thead>
+      <th>
+        Mentor
+      </th>
+      <th>
+        Availability
+      </th>
+      <th> Action </th>
+    </thead>
+    <tbody>
+      <% @availabilities.each do |a| %>
+
+      <tr>
+        <td>
+          <%= link_to_user(a.mentor) %>
+        </td>
+        <td>
+          <%= display_availability(a) %>
+        </td>
+        <td>
+          <%= link_to "Sign up", new_appointment_request_path(:availability_id => a.id), :class => "btn btn-small btn-primary" %>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <% end %>
+
+  <% unless @appointments.empty? %>
+    <div class="page-header">
+      <h1>Upcoming Mentoring Appointments</h1>
+    </div>
+    <table class="table">
+      <colgroup>
+        <col width="20%">
+        <col width="80%">
+      </colgroup>
+      <thead>
+        <th>
+          Mentor
+        </th>
+        <th>
+          Appointment
+        </th>
+      </thead>
+      <tbody>
+        <% @appointments.each do |a| %>
+
+        <tr>
+          <td>
+            <%= link_to_user(a.mentor) %>
+          </td>
+          <td>
+            <%= display_availability(a) %>
+          </td>
+          
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+
+

@@ -1,10 +1,15 @@
+<div class="page-header">
 <h1>Sign up</h1>
-
 <p>With <%= link_to_user(@availability.mentor) %> on <%= display_availability(@availability) %></p>
+</div>
+<%= simple_form_for @appointment_request, :url => url_for(:action => 'create', :controller => 'appointment_requests', :availability_id => @availability.id),
+    :method => 'post' do |f| %>
+  <%= f.fields_for f.object.build_mentee do |mf| %>
+    <%= mf.input :first_name %>
+    <%= mf.input :last_name %>
+    <%= mf.input :twitter_handle %>
+    <%= mf.input :email %>
+  <% end %>
+  <%= f.submit :class => "btn btn-primary" %>
 
-<%= form_tag appointment_requests_path(:availability_id => @availability) do %>
-<p>Name: <%= text_field_tag :first_name, params[:first_name] %><%= text_field_tag :last_name, params[:last_name] %></p>
-<p>Twitter handle: <%= text_field_tag :twitter_handle, params[:twitter_handle] %></p>
-<p>Email address: <%= text_field_tag :email, params[:email] %></p>
-<input type="submit" />
 <% end %>
