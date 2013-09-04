@@ -1,21 +1,114 @@
-<% unless @availabilities.empty? %><h1>My upcoming availability</h1><% end %>
-<% @availabilities.each do |a| %>
-<p>
-  On <%= display_availability(a) %>
-  <%= link_to "Delete!", availability_path(a), :method => :delete %>
-</p>  
+<% if @availabilities.empty? and @menteeing_appointments.empty? and @mentoring_appointments.empty? %>
+<div class = "hero-unit">
+  <h1> No mentorship activities :( </h1>
+  <p>
+    Check for <%= link_to "availabilities", availabilities_path %> or <%= link_to "offer to mentor someone", new_availability_path %>
+  </p>
+</div>
+
+<% end %>
+<% unless @availabilities.empty? %>
+<div class="page-header">
+<h1>My upcoming availability</h1>
+</div>
+  <table class="table">
+    <colgroup>
+      <col width="20%">
+      <col width="60%">
+      <col width="20%">
+    </colgroup>
+    <thead>
+      <th>
+        Mentor
+      </th>
+      <th>
+        Availability
+      </th>
+      <th>
+        Action
+      </th>
+    </thead>
+    <tbody>
+      <% @availabilities.each do |a| %>
+        <tr>
+          <td>
+            <%= link_to_user(a.mentor) %>
+          </td>
+          <td>
+            <%= display_availability(a) %>
+          </td>
+          <td>
+            <%= link_to "Delete!", availability_path(a), :method => :delete, :class => "btn btn-small btn-danger" %>
+        </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 <% end %>
 
-<% unless @menteeing_appointments.empty? %><h1>My upcoming appointments with mentors</h1><% end %>
-<% @menteeing_appointments.each do |a| %>
-<p>
-  <%= display_appointment(a) %>
-</p>  
+<% unless @menteeing_appointments.empty? %>
+  <div class="page-header">
+    <h1>My upcoming appointments with mentors</h1>
+  </div>
+  <table class="table">
+    <colgroup>
+      <col width="20%">
+      <col width="80%">
+    </colgroup>
+    <thead>
+      <th>
+        Mentor
+      </th>
+      <th>
+        Appointment
+      </th>
+      <th> Action </th>
+    </thead>
+    <tbody>
+      <% @menteeing_appointments.each do |a| %>
+
+      <tr>
+        <td>
+          <%= link_to_user(a.mentor) %>
+        </td>
+        <td>
+          <%= display_availability(a) %>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
 <% end %>
 
-<% unless @mentoring_appointments.empty? %><h1>My upcoming appointments with mentees</h1><% end %>
-<% @mentoring_appointments.each do |a| %>
-<p>
-  <%= display_appointment(a) %>
-</p>  
+<% unless @mentoring_appointments.empty? %>
+  <div class="page-header">
+    <h1>My upcoming appointments with mentees</h1>
+  </div>
+  <table class="table">
+    <colgroup>
+      <col width="20%">
+      <col width="80%">
+    </colgroup>
+    <thead>
+      <th>
+        Mentee
+      </th>
+      <th>
+        Appointment
+      </th>
+    </thead>
+    <tbody>
+      <% @mentoring_appointments.each do |a| %>
+        <tr>
+          <td>
+            <%= link_to_user(a.mentee) %>
+          </td>
+          <td>
+            <%= display_availability(a) %>
+          </td>
+          
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 <% end %>

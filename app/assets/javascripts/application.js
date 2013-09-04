@@ -15,6 +15,7 @@
 //= require jquery.ui.datepicker
 //= require jquery.ui.slider
 //= require datetimepicker
+//= require bootstrap
 //= require_tree .
 
 
