@@ -25,7 +25,6 @@ group :development, :test do
   gem 'rspec-rails', '~> 2.0'
   gem 'shoulda-matchers'
   gem 'factory_girl_rails', '~> 4.0'
-  gem 'mysql2'
 end
 gem 'ui_datepicker-rails3'
 gem 'simple_form'
